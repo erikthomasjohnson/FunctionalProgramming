@@ -1,0 +1,6 @@
+c:\users\erikj\documents\visual studio 2015\Projects\FunctionalProgramming\FunctionalProgramming\bin\Debug\FunctionalProgramming.exe.config
+c:\users\erikj\documents\visual studio 2015\Projects\FunctionalProgramming\FunctionalProgramming\bin\Debug\FunctionalProgramming.exe
+c:\users\erikj\documents\visual studio 2015\Projects\FunctionalProgramming\FunctionalProgramming\bin\Debug\FunctionalProgramming.pdb
+c:\users\erikj\documents\visual studio 2015\Projects\FunctionalProgramming\FunctionalProgramming\obj\Debug\FunctionalProgramming.csprojResolveAssemblyReference.cache
+c:\users\erikj\documents\visual studio 2015\Projects\FunctionalProgramming\FunctionalProgramming\obj\Debug\FunctionalProgramming.exe
+c:\users\erikj\documents\visual studio 2015\Projects\FunctionalProgramming\FunctionalProgramming\obj\Debug\FunctionalProgramming.pdb
