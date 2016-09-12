@@ -94,7 +94,7 @@ namespace FunctionalProgramming
                 }
             }
         }
-        public int GetNumbers(string line)
+        static int GetNumbers(string line)
         {
             string dateLine = line.Substring(line.IndexOf('[') + 13, 8);
             string getNumbers = new String(dateLine.Where(Char.IsDigit).ToArray());
