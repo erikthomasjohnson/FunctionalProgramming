@@ -54,12 +54,11 @@ namespace FunctionalProgramming
         }
         public void OrderLogFile(int startDate = 165000, int endDate = 173000)
         {
+            List<int> numberLine = new List<int>();
+            List<string> disorderedLine = new List<string>();
+            List<string> orderedLine = new List<string>();
             using (StreamReader reader = new StreamReader("C:/Users/erikj/Documents/GitHub/FunctionalProgramming/FunctionalProgramming/FunctionalProgramming/Sample.txt"))
             {
-                List<int> numberLine = new List<int>();
-                List<string> disorderedLine = new List<string>();
-                List<string> orderedLine = new List<string>();
-                int next = 0;
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -69,28 +68,29 @@ namespace FunctionalProgramming
                         numberLine.Add(GetNumbers(line));
                     }
                 }
-                numberLine.Sort();
-                while (next < numberLine.Count)
+            }
+            numberLine.Sort();
+            int next = 0;
+            while (next < numberLine.Count)
+            {
+                foreach (string newLine in disorderedLine)
                 {
-                    foreach (string newLine in disorderedLine)
+                    if (GetNumbers(newLine) == numberLine[next])
                     {
-                        if (GetNumbers(newLine) == numberLine[next])
-                        {
-                            orderedLine.Add(newLine);
-                            next++;
-                        }
+                        orderedLine.Add(newLine);
+                        next++;
                     }
                 }
-                for (int i = 0; i < orderedLine.Count - 1; i++) { if (orderedLine[i] == orderedLine[i + 1]) { orderedLine.RemoveAt(i + 1); } }
-                int trip = 0;
-                foreach (string requestLine in orderedLine)
+            }
+            for (int i = 0; i < orderedLine.Count - 1; i++) { if (orderedLine[i] == orderedLine[i + 1]) { orderedLine.RemoveAt(i + 1); } }
+            int trip = 0;
+            foreach (string requestLine in orderedLine)
+            {
+                if (GetNumbers(requestLine) >= startDate) { trip = 1; }
+                if (GetNumbers(requestLine) > endDate) { trip = 0; }
+                if (trip == 1)
                 {
-                    if (GetNumbers(requestLine) >= startDate) { trip = 1; }
-                    if (GetNumbers(requestLine) > endDate) { trip = 0; }
-                    if (trip == 1)
-                    {
-                        Console.WriteLine(requestLine);
-                    }
+                    Console.WriteLine(requestLine);
                 }
             }
         }
