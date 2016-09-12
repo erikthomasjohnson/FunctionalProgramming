@@ -11,7 +11,7 @@ namespace FunctionalProgramming
         static void Main(string[] args)
         {
             Functions newAvg = new Functions();
-            newAvg.GetTextFile();
+            newAvg.OrderTextFile();
             Console.ReadLine();
         }
     }

@@ -52,5 +52,44 @@ namespace FunctionalProgramming
                 }
             }
         }
+        public void OrderTextFile()
+        {
+            using (StreamReader reader = new StreamReader("C:/Users/erikj/Documents/GitHub/FunctionalProgramming/FunctionalProgramming/FunctionalProgramming/Sample.txt"))
+            {
+                List<int> numberLine = new List<int>();
+                List<string> disorderedLine = new List<string>();
+                List<string> orderedLine = new List<string>();
+                int next = 0;
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.Count() > 0)
+                    {
+                        disorderedLine.Add(line);
+                        string dateLine = line.Substring(line.IndexOf('[') + 13, 8);
+                        string getNumbers = new String(dateLine.Where(Char.IsDigit).ToArray());
+                        int numbers = int.Parse(getNumbers);
+                        numberLine.Add(numbers);
+                    }
+                }
+                numberLine.Sort();
+                while (next < numberLine.Count)
+                {
+                    foreach (string newLine in disorderedLine)
+                    {
+                        string dateLine = newLine.Substring(newLine.IndexOf('[') + 13, 8);
+                        string getNumbers = new String(dateLine.Where(Char.IsDigit).ToArray());
+                        int numbers = int.Parse(getNumbers);
+                        if (numbers == numberLine[next])
+                        {
+                            orderedLine.Add(newLine);
+                            next++;
+                        }
+                    }
+                }
+                for (int i = 0; i < orderedLine.Count - 1; i++) { if (orderedLine[i] == orderedLine[i + 1]) { orderedLine.RemoveAt(i + 1); } }
+                foreach (string x in orderedLine) { Console.WriteLine(x); }
+            }
+        }
     }
 }
