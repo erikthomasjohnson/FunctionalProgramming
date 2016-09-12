@@ -29,9 +29,9 @@ namespace FunctionalProgramming
         }
         public void GetTextFile()
         {
-            int startDate = 161000;
-            int endDate = 174700;
-            using (StreamReader reader = new StreamReader("C:/Users/erikj/Documents/Visual Studio 2015/Projects/FunctionalProgramming/FunctionalProgramming/Sample.txt"))
+            int startDate = 151000;
+            int endDate = 184700;
+            using (StreamReader reader = new StreamReader("C:/Users/erikj/Documents/GitHub/FunctionalProgramming/FunctionalProgramming/FunctionalProgramming/Sample.txt"))
             {
                 string line;
                 int trip = 0;
@@ -52,7 +52,7 @@ namespace FunctionalProgramming
                 }
             }
         }
-        public void OrderTextFile()
+        public void OrderLogFile(int startDate = 165000, int endDate = 173000)
         {
             using (StreamReader reader = new StreamReader("C:/Users/erikj/Documents/GitHub/FunctionalProgramming/FunctionalProgramming/FunctionalProgramming/Sample.txt"))
             {
@@ -66,10 +66,7 @@ namespace FunctionalProgramming
                     if (line.Count() > 0)
                     {
                         disorderedLine.Add(line);
-                        string dateLine = line.Substring(line.IndexOf('[') + 13, 8);
-                        string getNumbers = new String(dateLine.Where(Char.IsDigit).ToArray());
-                        int numbers = int.Parse(getNumbers);
-                        numberLine.Add(numbers);
+                        numberLine.Add(GetNumbers(line));
                     }
                 }
                 numberLine.Sort();
@@ -77,10 +74,7 @@ namespace FunctionalProgramming
                 {
                     foreach (string newLine in disorderedLine)
                     {
-                        string dateLine = newLine.Substring(newLine.IndexOf('[') + 13, 8);
-                        string getNumbers = new String(dateLine.Where(Char.IsDigit).ToArray());
-                        int numbers = int.Parse(getNumbers);
-                        if (numbers == numberLine[next])
+                        if (GetNumbers(newLine) == numberLine[next])
                         {
                             orderedLine.Add(newLine);
                             next++;
@@ -88,8 +82,24 @@ namespace FunctionalProgramming
                     }
                 }
                 for (int i = 0; i < orderedLine.Count - 1; i++) { if (orderedLine[i] == orderedLine[i + 1]) { orderedLine.RemoveAt(i + 1); } }
-                foreach (string x in orderedLine) { Console.WriteLine(x); }
+                int trip = 0;
+                foreach (string requestLine in orderedLine)
+                {
+                    if (GetNumbers(requestLine) >= startDate) { trip = 1; }
+                    if (GetNumbers(requestLine) > endDate) { trip = 0; }
+                    if (trip == 1)
+                    {
+                        Console.WriteLine(requestLine);
+                    }
+                }
             }
+        }
+        public int GetNumbers(string line)
+        {
+            string dateLine = line.Substring(line.IndexOf('[') + 13, 8);
+            string getNumbers = new String(dateLine.Where(Char.IsDigit).ToArray());
+            int numbers = int.Parse(getNumbers);
+            return numbers;
         }
     }
 }
